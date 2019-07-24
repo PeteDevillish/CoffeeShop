@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import wsiz.groupproject.demo.ProductRepository;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,17 +19,16 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
-    Date date;
-//    User user;
-    Status status;
-    //m,apa z produktami jako kluczami i integerami jako iloscia produktow
-    HashMap<Product, Integer> products;
+    private long id;
+    private LocalDate date;
+    @ManyToOne
+    private User user;
+    private Status status;
+    private HashMap<Product, Integer> products;
 
-    public Order(HashMap<Product, Integer> products) {
+    public Order(HashMap<Product, Integer> products, User user) {
         this.products = products;
-//        dodac automatyczne dodawanie daty zakupu
-//        date = Date.
+        date = LocalDate.now();
         status = Status.ORDERED;
     }
 
