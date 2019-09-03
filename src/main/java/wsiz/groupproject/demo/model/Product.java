@@ -1,7 +1,6 @@
-package wsiz.groupproject.demo.Service;
+package wsiz.groupproject.demo.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,12 +8,15 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "products")
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
+@ToString
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
     private BigDecimal price;
+    @Enumerated(EnumType.STRING)
     private Category category;
     private boolean isPromo;
     private double promoPrice;
@@ -22,7 +24,8 @@ public class Product {
     private static Long numberOfProductsInStock;
 
 
-    public Product(BigDecimal price, Category category, double promoPrice, Long numberOfProductsInStock) {
+    public Product(BigDecimal price, Category category, double promoPrice, Long numberOfProductsInStock, String name) {
+        this.name = name;
         this.price = price;
         this.category = category;
         this.promoPrice = promoPrice;
@@ -30,7 +33,8 @@ public class Product {
         this.numberOfProductsInStock = numberOfProductsInStock;
     }
 
-    public Product(BigDecimal price, Category category, Long numberOfProductsInStock) {
+    public Product(BigDecimal price, Category category, Long numberOfProductsInStock, String name) {
+        this.name = name;
         this.price = price;
         this.category = category;
         this.numberOfProductsInStock = numberOfProductsInStock;

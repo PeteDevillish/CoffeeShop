@@ -1,11 +1,11 @@
-package wsiz.groupproject.demo;
+package wsiz.groupproject.demo.service;
 
 import org.springframework.data.repository.CrudRepository;
-import wsiz.groupproject.demo.Service.Product;
+import org.springframework.stereotype.Repository;
+import wsiz.groupproject.demo.model.Product;
 
 import java.util.List;
-import java.util.Optional;
-
+@Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findByIsPromoTrue();
 }

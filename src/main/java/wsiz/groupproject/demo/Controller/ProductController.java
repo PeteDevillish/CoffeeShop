@@ -2,8 +2,8 @@ package wsiz.groupproject.demo.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import wsiz.groupproject.demo.ProductRepository;
-import wsiz.groupproject.demo.Service.Product;
+import wsiz.groupproject.demo.service.ProductRepository;
+import wsiz.groupproject.demo.model.Product;
 
 import java.util.List;
 import java.util.Optional;

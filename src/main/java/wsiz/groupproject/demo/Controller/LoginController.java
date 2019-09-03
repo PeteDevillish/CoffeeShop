@@ -1,36 +1,17 @@
 package wsiz.groupproject.demo.Controller;
 
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import wsiz.groupproject.demo.model.User;
 
-import java.util.LinkedHashMap;
 
-@Controller
+@RestController
 public class LoginController {
-
-    @GetMapping("/test1")
-    public String test1(){
-        return "test";
-    }
-
-    @GetMapping("/test2")
-    public String test2(Model model){
-
-
-      Object details =( (UsernamePasswordAuthenticationToken)((OAuth2Authentication)((SecurityContextImpl) SecurityContextHolder.getContext()).getAuthentication()).getUserAuthentication()).getDetails();
-      String name = ((LinkedHashMap) details).values().toArray()[1].toString();
-      String picture = ((LinkedHashMap) details).values().toArray()[5].toString();
-      String email = ((LinkedHashMap) details).values().toArray()[6 ].toString();
-
-      model.addAttribute("name", name);
-      model.addAttribute("picture", picture);
-      model.addAttribute("email", email);
-      return  "gui";
+    @RequestMapping("/user")
+    public User user(@AuthenticationPrincipal User principal) {
+        return principal;
     }
 }
+

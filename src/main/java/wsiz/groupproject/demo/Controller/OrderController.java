@@ -2,22 +2,21 @@ package wsiz.groupproject.demo.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import wsiz.groupproject.demo.OrderRepository;
-import wsiz.groupproject.demo.Service.Order;
-import wsiz.groupproject.demo.Service.Product;
-import wsiz.groupproject.demo.Service.User;
+import wsiz.groupproject.demo.service.OrderRepository;
+import wsiz.groupproject.demo.model.Order;
+import wsiz.groupproject.demo.model.Product;
+import wsiz.groupproject.demo.model.User;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-//@CrossOrigin
 public class OrderController {
     @Autowired
     OrderRepository orderRepository;
 
-    @GetMapping("/allOrders")
+    @GetMapping("/allorders")
     List<Order> getAllOrders(){
         return (List<Order>) orderRepository.findAll();
     }
@@ -31,8 +30,8 @@ public class OrderController {
 
 
     @PostMapping("/createOrder")
-    public Order addOrder(@RequestParam HashMap<Product, Integer> products, User user){
-        Order _order = new Order(products, user);
+    public Order addOrder(@RequestParam Product product, User user){
+        Order _order = new Order(product, user);
         orderRepository.save(_order);
         return _order;
     }

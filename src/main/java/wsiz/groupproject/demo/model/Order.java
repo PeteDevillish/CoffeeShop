@@ -1,16 +1,11 @@
-package wsiz.groupproject.demo.Service;
+package wsiz.groupproject.demo.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import wsiz.groupproject.demo.ProductRepository;
+import wsiz.groupproject.demo.DemoApplication;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 @Entity
 @Data
@@ -22,12 +17,13 @@ public class Order {
     private long id;
     private LocalDate date;
     @ManyToOne
+    private Product product;
+    @ManyToOne
     private User user;
+    @Enumerated(EnumType.STRING)
     private Status status;
-    private HashMap<Product, Integer> products;
 
-    public Order(HashMap<Product, Integer> products, User user) {
-        this.products = products;
+    public Order(Product product, User user) {
         date = LocalDate.now();
         status = Status.ORDERED;
     }
