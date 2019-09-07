@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import wsiz.groupproject.demo.model.User;
 
@@ -19,6 +20,11 @@ public class UserService {
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @RequestMapping("/user")
+    public User user(@AuthenticationPrincipal User principal) {
+        return principal;
+    }
 
     @GetMapping("/users")
     public ResponseEntity getUsers() throws JsonProcessingException {

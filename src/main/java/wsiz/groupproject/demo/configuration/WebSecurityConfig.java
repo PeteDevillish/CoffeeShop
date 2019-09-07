@@ -28,7 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfiguration.class);
 
     @Override
